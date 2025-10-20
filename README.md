@@ -106,6 +106,15 @@
 | analyze_risks           | 시장 리스크 분석 (기술/경쟁/규제/수요)              |
 | calculate_score         | 시장성 점수(0~100) 산출                             |
 
+#### 시장성 평가 지표
+
+| 평가 항목 | 배점 | 평가 기준 |
+|---|---|---|
+| 시장 규모 점수 (market_size_score) | 0~25점 | 시장 규모가 클수록 높은 점수 |
+| 성장성 점수 (growth_score) | 0~30점 | 성장률(CAGR)이 높을수록 높은 점수 |
+| 경쟁 환경 점수 (competition_score) | 0~25점 | 경쟁이 약할수록 높은 점수 (진입장벽 高 = 高점수) |
+| 리스크 점수 (risk_score) | 0~20점 | 리스크가 낮을수록 높은 점수 |
+| **총점 (total_score)** | **0~100점** | 4개 항목의 합산 점수 |
 
 ---
 
@@ -151,16 +160,6 @@
 | assess_investment_risks     | 6개 리스크 요소 평가 및 위험도 산출       |
 | make_final_decision         | 종합 점수 기반 최종 투자 결정 도출        |
 
----
-### 시장성 평가 지표
-
-| 평가 항목 | 배점 | 평가 기준 |
-|---|---|---|
-| 시장 규모 점수 (market_size_score) | 0~25점 | 시장 규모가 클수록 높은 점수 |
-| 성장성 점수 (growth_score) | 0~30점 | 성장률(CAGR)이 높을수록 높은 점수 |
-| 경쟁 환경 점수 (competition_score) | 0~25점 | 경쟁이 약할수록 높은 점수 (진입장벽 高 = 高점수) |
-| 리스크 점수 (risk_score) | 0~20점 | 리스크가 낮을수록 높은 점수 |
-| **총점 (total_score)** | **0~100점** | 4개 항목의 합산 점수 |
 
 ---
 
@@ -372,6 +371,7 @@ ai-agent/
 - [KERIS 한국교육학술정보원](https://www.keris.or.kr/main/ad/pblcte/selectPblcteOVSEAList.do?mi=1143)
 - [ESSA Evidence Standards](https://essa.ed.gov/)
 - [EdTech Investment Trends - HolonIQ](https://www.holoniq.com/)
+
 
 
 
