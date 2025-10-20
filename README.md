@@ -55,7 +55,7 @@
 | `llm_call`             | OpenAI API 호출로 초기 요약 생성                     |
 | `parse`                | JSON 파싱 및 Pydantic 검증, 안전한 요약 결과 반환       |
 
-### 3.Market eval agent : 정보 전달에 따른 기업 시장성 평가 세부 지표 파악
+### 3.Market eval Agent : 정보 전달에 따른 기업 시장성 평가 세부 지표 파악
     - Node : retriever, search_tool, classify_query, retrieve_internal, web_search, analyze_market_size,
              analyze_growth, analyze_competition, analyze_risks, calculate_score, generate_report
     - Tool : [retriever_tool, search_tool]
@@ -141,4 +141,5 @@ ai-agent/
 - [KERIS 한국교육학술정보원] (https://www.keris.or.kr/main/ad/pblcte/selectPblcteOVSEAList.do?mi=1143)
 - [ESSA Evidence Standards](https://essa.ed.gov/)
 - [EdTech Investment Trends](https://www.holoniq.com/)
+
 
