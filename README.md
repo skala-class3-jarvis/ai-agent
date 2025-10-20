@@ -42,7 +42,6 @@
 | Tool Name          | Library              | 역할                           |
 |--------------------|----------------------|--------------------------------|
 | TavilySearchResults| Tavily               | 스타트업 정보 웹 검색          |
-| ChatOpenAI         | OpenAI               | GPT-4o-mini 모델 호출          |
 | PromptTemplate     | LangChain            | 검색 쿼리 프롬프트 생성        |
 | JSON Parser        | Python               | 검색 결과 구조화 및 파싱       |
 
@@ -67,7 +66,6 @@
 | Tool Name            | Library              | 역할                                  |
 |----------------------|----------------------|---------------------------------------|
 | TechSummaryAgent     | LangGraph StateGraph | 기술 요약 워크플로우 오케스트레이션   |
-| OpenAI Responses API | openai               | gpt-4o-mini 모델 호출                 |
 | TechSummarySchema    | Pydantic             | LLM 응답 구조 검증 및 정규화          |
 
 **Nodes**
@@ -122,9 +120,6 @@
 | Tool Name           | Library              | 역할                              |
 |---------------------|----------------------|-----------------------------------|
 | DuckDuckGoSearchRun | DuckDuckGo           | 경쟁사 정보 웹 검색               |
-| ChatOpenAI          | OpenAI               | GPT-4o-mini 모델 호출             |
-| ChatPromptTemplate  | LangChain            | 경쟁 분석 프롬프트 생성           |
-| StateGraph          | LangGraph            | 경쟁 분석 워크플로우 관리         |
 
 **Nodes**
 
@@ -146,11 +141,7 @@
 
 | Tool Name           | Library              | 역할                              |
 |---------------------|----------------------|-----------------------------------|
-| ChatOpenAI          | OpenAI               | GPT-4o-mini 모델 호출             |
-| ChatPromptTemplate  | LangChain            | 투자 결정 프롬프트 생성           |
-| Python Logic        | Python               | 점수 계산 및 의사결정 로직        |
 | JSON Parser         | Python               | 결과 구조화 및 파싱               |
-| StateGraph          | LangGraph            | 투자 결정 워크플로우 관리         |
 
 **Nodes**
 
@@ -218,5 +209,6 @@ ai-agent/
 - [KERIS 한국교육학술정보원](https://www.keris.or.kr/main/ad/pblcte/selectPblcteOVSEAList.do?mi=1143)
 - [ESSA Evidence Standards](https://essa.ed.gov/)
 - [EdTech Investment Trends - HolonIQ](https://www.holoniq.com/)
+
 
 
