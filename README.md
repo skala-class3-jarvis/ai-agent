@@ -207,5 +207,5 @@ ai-agent/
 ## Contributors 
 - 정재민 : Evaluation market size RAG Agent Design
 - 장소민 : Company Comparison and Investment Evalution decision Agent Design
-- 한정석 : Main Agent Design and all Agent Combination, PDF Generate and checking
+- 한정석 : Startup Search Agent Design and all Agent Combination, PDF Generate and checking
 - 이정엽 : Company Technical skill Set Summary
