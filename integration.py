@@ -2,7 +2,7 @@ from langgraph.graph import StateGraph, END
 from typing import Dict
 import asyncio
 
-# === [1] 에이전트 임포트 ===
+# === [1] 에이전트 import ===
 from agents.search_agent import startup_search_node
 from agents.tech_summary_agent import tech_summary_node
 from agents.market_analysis_agent import market_analysis_node
@@ -14,25 +14,23 @@ from agents.report_agent import report_node
 # === [2] 스타트업별 순차 처리 노드 ===
 async def process_next_startup_node(state: Dict) -> Dict:
     """startups 리스트에서 하나씩 꺼내 current_startup에 할당"""
-    startups = state.get("startups", [])
-    processed = state.get("processed_startups", [])
+    startups = list(state.get("startups", []))
+    processed = list(state.get("processed_startups", []))
 
-    # 더 이상 남은 스타트업이 없으면 종료
     if not startups:
         print("\n모든 스타트업 처리 완료")
-        return {"done": True}
+        state["done"] = True
+        return state
 
     current = startups.pop(0)
     processed.append(current)
-
     print(f"\n[진행중] {current.get('name', 'Unknown')} 처리 시작")
 
-    return {
-        "current_startup": current,
-        "startups": startups,
-        "processed_startups": processed,
-        "done": False
-    }
+    state["current_startup"] = current
+    state["startups"] = startups
+    state["processed_startups"] = processed
+    state["done"] = False
+    return state
 
 
 # === [3] 투자 판단 분기 ===
@@ -48,7 +46,7 @@ def route_decision(state: Dict) -> str:
         decision = inv_decision.get("decision", "")
 
     decision_lower = str(decision).lower()
-    if any(k in decision_lower for k in ["유망", "확정", "buy", "strong buy", "invest"]):
+    if "유치" in decision_lower or "확정" in decision_lower:
         print(f"투자 확정 감지 → {decision}")
         return "invested"
 
@@ -75,10 +73,10 @@ graph.add_node("report", report_node)
 
 graph.set_entry_point("startup_search")
 
-# 1️⃣ 검색 후 순차 처리 시작
+# 검색 후 순차 처리 시작
 graph.add_edge("startup_search", "next_startup")
 
-# 2️⃣ next_startup → 처리 or 종료
+# next_startup → 처리 or 종료
 graph.add_conditional_edges(
     "next_startup",
     check_done,
@@ -88,12 +86,12 @@ graph.add_conditional_edges(
     }
 )
 
-# 3️⃣ 기본 처리 단계
+# 기본 처리 단계
 graph.add_edge("tech_summary", "market_eval")
 graph.add_edge("market_eval", "competitor_analysis")
 graph.add_edge("competitor_analysis", "investment_decision")
 
-# 4️⃣ 투자 판단 → 분기
+# 투자 판단 → 분기
 graph.add_conditional_edges(
     "investment_decision",
     route_decision,
@@ -103,7 +101,7 @@ graph.add_conditional_edges(
     }
 )
 
-# 5️⃣ 보고서 생성 후 다음 스타트업 or 종료
+# 보고서 생성 후 다음 스타트업 or 종료
 graph.add_conditional_edges(
     "report",
     check_done,
@@ -115,17 +113,19 @@ graph.add_conditional_edges(
 
 investment_graph = graph.compile()
 
-
 # === [6] 실행 ===
 if __name__ == "__main__":
     result = asyncio.run(
-        investment_graph.ainvoke({"query": "국내 에듀테크 스타트업 5개"})
+        investment_graph.ainvoke(
+            {"query": "국내 에듀테크 스타트업", "count": 1},
+            config={"recursion_limit": 100}
+        )
     )
 
     print("\n\n=== 보고서 생성 결과 ===\n")
     reports = result.get("reports", [])
     for r in reports:
         if "pdf" in r:
-            print(f"📄 {r['name']} → {r['pdf']}")
+            print(f"{r['name']} → {r['pdf']}")
         else:
-            print(f"⚠️ {r['name']} → {r.get('error', 'Unknown error')}")
+            print(f"{r['name']} → {r.get('error', 'Unknown error')}")

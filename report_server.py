@@ -3,7 +3,8 @@ from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML
 from pydantic import BaseModel
 from urllib.parse import quote
-from typing import Tuple
+from typing import Any, Dict, List, Tuple
+import os
 import unicodedata
 import io
 import re
@@ -33,6 +34,15 @@ class ReportInput(BaseModel):
     market_eval: MarketEval
     decision: str
     decision_reason: str
+    market_eval_detail: Dict[str, Any] = {}
+    competitor_list: List[Dict[str, Any]] = []
+    competitor_analysis: Dict[str, Any] = {}
+    competitive_positioning: Dict[str, Any] = {}
+    investment_scores: Dict[str, Any] = {}
+    risk_assessment: Dict[str, Any] = {}
+    investment_decision: Dict[str, Any] = {}
+    llm_summary: Dict[str, Any] = {}
+    headline_metrics: Dict[str, Any] = {}
 
 
 # ----------- Jinja2 Environment -----------
@@ -40,16 +50,11 @@ env = Environment(loader=FileSystemLoader("templates"))
 
 
 def build_filenames(company_name: str) -> Tuple[str, str]:
-    """Return ASCII-safe fallback and RFC 5987 encoded filenames."""
     base_filename = f"{company_name}_report.pdf"
-
-    normalized = unicodedata.normalize("NFKD", company_name)
-    ascii_name = normalized.encode("ascii", "ignore").decode("ascii")
-    slug = re.sub(r"[^A-Za-z0-9_-]+", "_", ascii_name).strip("_")
-    fallback = f"{slug or 'report'}_report.pdf"
-
     encoded = quote(base_filename)
+    fallback = "report.pdf"  # 영문 fallback
     return fallback, encoded
+
 
 
 # ----------- Endpoint -----------
@@ -58,7 +63,8 @@ def generate_report(data: ReportInput):
     """
     LangGraph 결과(JSON) → PDF 보고서 자동 생성
     """
-    template = env.get_template("report_template.html")
+    template_name = os.getenv("REPORT_TEMPLATE", "report_template.html")
+    template = env.get_template(template_name)
     html_out = template.render(data=data.dict())
 
     # PDF 메모리에 생성

@@ -111,4 +111,5 @@ async def investment_decision_node(state: Dict) -> Dict:
     current["investment_decision"] = decision
 
     print(f"[{name}] 투자 판단 완료: {decision.get('decision', 'Unknown')}")
-    return {"current_startup": current}
+    state["current_startup"] = current
+    return state

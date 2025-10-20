@@ -110,4 +110,5 @@ async def competitor_analysis_node(state: Dict) -> Dict:
     current["competitive_positioning"] = positioning
 
     print(f"[{name}] 경쟁사 분석 완료")
-    return {"current_startup": current}
+    state["current_startup"] = current
+    return state

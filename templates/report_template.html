@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <style>
@@ -9,591 +10,321 @@
         }
 
         :root {
-            --brand-primary: #0b2e4f;
-            --brand-accent: #1b5f9c;
-            --brand-muted: #d6dee7;
-            --neutral-bg: #f5f7fa;
-            --text-primary: #1f2a38;
-            --text-secondary: #506075;
-            --text-tertiary: #7b8899;
-            --success: #2c8d5a;
-            --warning: #d3922b;
+            --blue-dark: #0a1f44;
+            --blue-primary: #0d66c2;
+            --red-accent: #b22234;
+            --grey-text: #5b6673;
+            --grey-light: #d6dbe2;
+            --grey-panel: #f4f6f9;
         }
 
         body {
-            font-family: "Source Sans Pro", "Segoe UI", Arial, sans-serif;
-            font-size: 9.5pt;
-            line-height: 1.45;
-            color: var(--text-primary);
-            background-color: var(--neutral-bg);
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            font-size: 9pt;
+            line-height: 1.35;
+            color: var(--blue-dark);
+            background: #ffffff;
         }
 
         .wrapper {
-            background: #ffffff;
+            border: 1px solid var(--grey-light);
             border-radius: 10px;
-            box-shadow: 0 8px 28px rgba(18, 52, 86, 0.08);
-            padding: 22px 32px 34px;
+            padding: 20px 26px 26px;
+            box-shadow: 0 8px 24px rgba(10, 31, 68, 0.08);
         }
 
         header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid var(--brand-muted);
-            padding-bottom: 14px;
-            margin-bottom: 18px;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--grey-light);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
         }
 
-        .identity {
+        .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .identity-mark {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #0b2e4f, #1b5f9c);
+        .badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--blue-primary), #4a9ff7);
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .identity-mark span {
-            font-size: 10pt;
-            letter-spacing: 1.1px;
             font-weight: 700;
-            color: #ffffff;
-        }
-
-        .identity-text {
-            color: var(--text-tertiary);
-            font-size: 8pt;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .headline {
-            text-align: right;
-        }
-
-        .headline h1 {
-            margin: 0;
-            font-size: 15pt;
-            letter-spacing: 0.4px;
-            color: var(--brand-primary);
-            text-transform: uppercase;
-        }
-
-        .headline span {
-            display: block;
-            font-size: 8pt;
-            color: var(--text-tertiary);
-            margin-top: 3px;
-        }
-
-        h2.section-title {
-            text-transform: uppercase;
-            font-size: 10pt;
-            letter-spacing: 1.2px;
-            margin: 24px 0 10px;
-            color: var(--brand-primary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        h2.section-title::before {
-            content: "";
-            width: 32px;
-            height: 3px;
-            border-radius: 999px;
-            background: linear-gradient(120deg, #0b2e4f, #1b5f9c);
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-top: 12px;
-        }
-
-        .summary-card {
-            border: 1px solid var(--brand-muted);
-            border-radius: 8px;
-            padding: 11px 12px;
-            background: #ffffff;
-        }
-
-        .label {
-            font-size: 7pt;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .value-lg {
+        .brand-label {
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            font-size: 7.5pt;
+            color: var(--grey-text);
+        }
+
+        .title-block {
+            text-align: right;
+        }
+
+        .title-block h1 {
+            margin: 0;
+            font-size: 15pt;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--blue-primary);
+        }
+
+        .title-block span {
             display: block;
-            font-size: 13pt;
+            margin-top: 4px;
+            font-size: 7pt;
+            color: var(--grey-text);
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .metric-card {
+            background: var(--grey-panel);
+            border: 1px solid var(--grey-light);
+            border-radius: 8px;
+            padding: 10px 12px;
+            min-height: 60px;
+        }
+
+        .metric-label {
+            font-size: 7pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--grey-text);
+        }
+
+        .metric-value {
+            font-size: 12pt;
             font-weight: 600;
             margin-top: 4px;
         }
 
-        .score-bar {
-            position: relative;
-            height: 8px;
+        h2.section {
+            margin: 12px 0 6px;
+            font-size: 9.5pt;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        h2.section::before {
+            content: "";
+            width: 28px;
+            height: 3px;
             border-radius: 999px;
-            background: #dce4ee;
-            overflow: hidden;
-            margin-top: 8px;
+            background: linear-gradient(90deg, var(--red-accent), var(--blue-primary));
         }
 
-        .score-bar span {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: linear-gradient(90deg, #1b5f9c, #49a8da);
+        .summary-text {
+            background: var(--grey-panel);
+            border: 1px solid var(--grey-light);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 10px;
         }
 
-        .info-grid {
+        .grid-two {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 16px;
+            gap: 12px;
         }
 
-        table.metrics {
-            width: 100%;
-            border-collapse: collapse;
+        .mini-card {
+            border: 1px solid var(--grey-light);
+            border-radius: 8px;
+            padding: 10px 12px;
+            background: #ffffff;
         }
 
-        table.metrics th {
-            text-align: left;
-            font-size: 8pt;
-            color: var(--text-secondary);
-            padding: 5px 0;
-            font-weight: 600;
-        }
-
-        table.metrics td {
-            padding: 5px 0;
-            font-size: 9pt;
-        }
-
-        ul.inline-list {
-            padding-left: 16px;
+        ul.compact {
             margin: 6px 0 0;
+            padding-left: 16px;
         }
 
-        ul.inline-list li {
+        ul.compact li {
             margin-bottom: 3px;
         }
 
-        ul.badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            list-style: none;
-            padding: 0;
-            margin: 6px 0;
+        table.slim {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
         }
 
-        ul.badges li {
-            padding: 4px 8px;
-            border-radius: 999px;
-            background: rgba(27, 95, 156, 0.1);
+        table.slim th,
+        table.slim td {
+            border: 1px solid var(--grey-light);
+            padding: 6px 8px;
             font-size: 8pt;
+            text-align: left;
         }
 
-        .visual-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
+        table.slim th {
+            background: rgba(13, 102, 194, 0.12);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
         }
 
-        .radial-card {
-            text-align: center;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid var(--brand-muted);
-            background: #ffffff;
-        }
-
-        .radial-score {
-            width: 98px;
-            height: 98px;
-            border-radius: 50%;
-            margin: 0 auto 8px;
-            position: relative;
-            background: conic-gradient(var(--brand-accent) calc(var(--score, 0) * 1%), #e2e8f0 0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--brand-primary);
-            font-size: 15pt;
-            font-weight: 600;
-        }
-
-        .radial-score::after {
-            content: "";
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            background: #ffffff;
-            border-radius: 50%;
-        }
-
-        .radial-score span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(11, 46, 79, 0.35), transparent);
-            margin: 22px 0;
-        }
-
-        footer {
-            margin-top: 26px;
-            border-top: 1px solid var(--brand-muted);
-            padding-top: 10px;
-            font-size: 7.5pt;
-            color: var(--text-tertiary);
+        .footnote {
+            margin-top: 14px;
+            border-top: 1px solid var(--grey-light);
+            padding-top: 8px;
+            font-size: 7pt;
+            color: var(--grey-text);
         }
     </style>
 </head>
+
 <body>
-<div class="wrapper">
-    <header>
-        <div class="identity">
-            <div class="identity-mark"><span>EL</span></div>
-            <div class="identity-text">Edutech Lighthouse Strategic Review</div>
-        </div>
-        <div class="headline">
-            <h1>{{ data.get('company_name', 'Edtech Venture Dossier') }}</h1>
-            <span>Confidential briefing issued to EduGrowth Investment Council</span>
-        </div>
-    </header>
-
-    {% macro percent_width(value) %}
-        {% set width = 0 %}
-        {% if value is number %}
-            {% set width = value %}
-        {% elif value %}
-            {% set cleaned = value|string|replace('%', '') %}
-            {% if cleaned|trim %}
-                {% set width = cleaned|float(0) %}
-            {% endif %}
-        {% endif %}
-        {% if width < 0 %}
-            {% set width = 0 %}
-        {% elif width > 100 %}
-            {% set width = 100 %}
-        {% endif %}
-        {{ "%.0f" % width }}
-    {% endmacro %}
-
-    {% set investment_overview = data.get('investment_decision', {}) %}
-    {% set investment_scores = data.get('investment_scores', {}) %}
-    {% set risk_assessment = data.get('risk_assessment', {}) %}
-    {% set tech_eval = data.get('tech_eval', {}) %}
-    {% set market_eval = data.get('market_eval', {}) %}
-    {% set market_eval_detail = data.get('market_eval_detail', {}) %}
-    {% set competitor_list = data.get('competitor_list', []) %}
-    {% set competitor_analysis = data.get('competitor_analysis', {}) %}
-    {% set positioning = data.get('competitive_positioning', {}) %}
-
-    <section>
-        <h2 class="section-title">Executive Highlights</h2>
-        <div class="summary-grid">
-            <div class="summary-card">
-                <span class="label">Investment Decision</span>
-                <span class="value-lg">{{ investment_overview.get('decision', 'Under Review') }}</span>
-                <div class="score-bar">
-                    {% set conf_val = percent_width(investment_overview.get('confidence', '0')) %}
-                    <span style="width: {{ conf_val }}%;"></span>
-                </div>
-                <small style="color: var(--text-tertiary);">Confidence: {{ investment_overview.get('confidence', 'N/A') }}</small>
+    {% set summary = data.get('llm_summary', {}) %}
+    {% set tech_summary = summary.get('technology', {}) %}
+    {% set market_summary = summary.get('market_competition', {}) %}
+    {% set risk_summary = summary.get('risk', {}) %}
+    {% set investment_summary = summary.get('investment', {}) %}
+    {% set metrics = data.get('headline_metrics', {}) %}
+    <div class="wrapper">
+        <header>
+            <div class="brand">
+                <div class="badge">EL</div>
+                <div class="brand-label">Edutech lighthouse briefing</div>
             </div>
-            <div class="summary-card">
-                <span class="label">Composite Score</span>
-                {% set total_score = investment_overview.get('score', investment_scores.get('total_score', 0)) %}
-                <span class="value-lg">{{ total_score }}</span>
-                <div class="score-bar">
-                    {% set total_width = percent_width(total_score) %}
-                    <span style="width: {{ total_width }}%;"></span>
-                </div>
-                <small style="color: var(--text-tertiary);">Portfolio Percentile: {{ investment_scores.get('percentile_rank', '—') }}</small>
+            <div class="title-block">
+                <h1>{{ data.get('company_name', 'Edtech Venture Report') }}</h1>
+                <span>Confidential · Single-page overview</span>
             </div>
-            <div class="summary-card">
-                <span class="label">Overall Risk</span>
-                {% set risk_total = risk_assessment.get('overall_risk_score', 0) %}
-                <span class="value-lg">{{ risk_total }}</span>
-                <div class="score-bar">
-                    {% set risk_width = percent_width(risk_total) %}
-                    <span style="width: {{ risk_width }}%; background: linear-gradient(90deg, #c06c37, #eb9e48);"></span>
+        </header>
+
+        <div class="metrics-row">
+            <div class="metric-card">
+                <div class="metric-label">Decision</div>
+                <div class="metric-value" style="color: var(--blue-primary);">{{ metrics.get('decision', 'Under Review')
+                    }}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Score</div>
+                <div class="metric-value">{{ metrics.get('score', 'N/A') }}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Confidence</div>
+                <div class="metric-value">{{ metrics.get('confidence', 'N/A') }}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Overall risk</div>
+                <div class="metric-value" style="color: var(--red-accent);">{{ metrics.get('overall_risk', 'N/A') }}
                 </div>
-                <small style="color: var(--text-tertiary);">Key Concerns: {{ investment_overview.get('risks', [])|join(', ') or 'None specified' }}</small>
             </div>
         </div>
 
-        {% if investment_overview.get('reason') %}
-        <div class="summary-card" style="margin-top: 12px;">
-            <span class="label">Investment Thesis</span>
-            <p style="margin-top: 6px; margin-bottom: 0;">{{ investment_overview.get('reason') }}</p>
-        </div>
-        {% endif %}
-
-        {% if investment_overview.get('next_steps') %}
-        <div class="summary-card" style="margin-top: 10px;">
-            <span class="label">Recommended Actions</span>
-            <ul class="inline-list">
-                {% for step in investment_overview.get('next_steps', []) %}
-                    <li>{{ step }}</li>
-                {% else %}
-                    <li style="color: var(--text-tertiary);">Action items pending.</li>
+        {% if summary.get('headline_points') %}
+        <div class="summary-text">
+            <strong>Key headlines:</strong>
+            <ul class="compact">
+                {% for item in summary.get('headline_points', [])[:3] %}
+                <li>{{ item }}</li>
                 {% endfor %}
             </ul>
         </div>
         {% endif %}
-    </section>
 
-    <div class="divider"></div>
+        <h2 class="section">Executive summary</h2>
+        <div class="summary-text">{{ summary.get('executive_summary', 'Summary pending.') }}</div>
 
-    <section>
-        <h2 class="section-title">Technology Outlook</h2>
-        <div class="info-grid">
-            <div>
-                <table class="metrics">
-                    <tbody>
-                    <tr>
-                        <th>Synopsis</th>
-                        <td>{{ tech_eval.get('summary', 'Technology synopsis pending submission.') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Highlights</th>
-                        <td>
-                            {% if tech_eval.get('highlights') %}
-                                <ul class="badges">
-                                    {% for item in tech_eval.get('highlights', [])[:6] %}
-                                        <li>{{ item }}</li>
-                                    {% endfor %}
-                                </ul>
-                            {% else %}
-                                <span style="color: var(--text-tertiary);">Awaiting highlight data.</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Gaps & Dependencies</th>
-                        <td>
-                            {% if tech_eval.get('gaps') %}
-                                <ul class="inline-list">
-                                    {% for gap in tech_eval.get('gaps', [])[:5] %}
-                                        <li>{{ gap }}</li>
-                                    {% endfor %}
-                                </ul>
-                            {% else %}
-                                <span style="color: var(--text-tertiary);">No critical gaps reported.</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <div class="radial-card">
-                    <span class="label">Technology Readiness Index</span>
-                    {% set readiness = percent_width(tech_eval.get('readiness_score', 72)) %}
-                    <div class="radial-score" style="--score: {{ readiness }};">
-                        <span>{{ readiness }}</span>
-                    </div>
-                    <small style="color: var(--text-tertiary);">Derived from architecture maturity & delivery benchmarks</small>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section>
-        <h2 class="section-title">Market Intelligence</h2>
-        <div class="info-grid">
-            <div>
-                <table class="metrics">
-                    <tbody>
-                    <tr>
-                        <th>Total Addressable Market</th>
-                        <td>{{ market_eval.get('size', 'TBD') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Growth Outlook</th>
-                        <td>{{ market_eval.get('growth', market_eval.get('growth_rate', 'TBD')) }}</td>
-                    </tr>
-                    <tr>
-                        <th>Competitive Density</th>
-                        <td>{{ market_eval.get('competition', 'Benchmark pending') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Analyst Commentary</th>
-                        <td>{{ market_eval.get('summary', market_eval_detail.get('analysis', 'Summary pending analyst validation.')) }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <div class="summary-card" style="margin-bottom: 10px;">
-                    <span class="label">Demand Drivers</span>
-                    <ul class="inline-list">
-                        {% for driver in market_eval_detail.get('demand_drivers', [])[:5] %}
-                            <li>{{ driver }}</li>
-                        {% else %}
-                            <li style="color: var(--text-tertiary);">Key demand catalysts not supplied.</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="summary-card">
-                    <span class="label">Material Risks</span>
-                    <ul class="inline-list">
-                        {% for risk in market_eval_detail.get('risks', [])[:5] %}
-                            <li>{{ risk }}</li>
-                        {% else %}
-                            <li style="color: var(--text-tertiary);">Risk factors under evaluation.</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section>
-        <h2 class="section-title">Competitive Landscape</h2>
-        <div class="visual-row">
-            <div class="radial-card">
-                <span class="label">Competition Intensity (1-10)</span>
-                {% set comp_val = competitor_analysis.get('competition_intensity', 5) %}
-                {% set comp_percent = percent_width(comp_val * 10 if comp_val is number else comp_val) %}
-                <div class="radial-score" style="--score: {{ comp_percent }};">
-                    <span>{{ comp_val }}</span>
-                </div>
-                <small style="color: var(--text-tertiary);">Converted to percentage for visual uniformity</small>
-            </div>
-            <div class="radial-card">
-                <span class="label">Strategic Positioning</span>
-                <div style="margin-top: 16px; font-size: 11pt; font-weight: 600;">{{ competitor_analysis.get('market_positioning', 'Pending') }}</div>
-                <small style="color: var(--text-tertiary); display: block; margin-top: 6px;">Relative to incumbent offerings</small>
-            </div>
-            <div class="radial-card">
-                <span class="label">Moat Composite</span>
-                {% set moat_val = positioning.get('competitive_moat', {}).get('overall', 5.5) %}
-                {% set moat_percent = percent_width(moat_val * 10 if moat_val is number else moat_val) %}
-                <div class="radial-score" style="--score: {{ moat_percent }};">
-                    <span>{{ moat_val }}</span>
-                </div>
-                <small style="color: var(--text-tertiary);">Aggregate of technology, brand, network assets</small>
-            </div>
-        </div>
-
-        {% if competitor_list %}
-        <table class="metrics" style="margin-top: 14px; border-top: 1px solid var(--brand-muted); padding-top: 8px;">
-            <thead>
-            <tr>
-                <th style="width: 22%;">Company</th>
-                <th style="width: 40%;">Summary</th>
-                <th style="width: 14%;">Category</th>
-                <th style="width: 12%;">Overlap</th>
-                <th style="width: 12%;">Stage</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for competitor in competitor_list[:6] %}
-                <tr>
-                    <td>{{ competitor.get('name', 'N/A') }}</td>
-                    <td>{{ competitor.get('description', '—') }}</td>
-                    <td>{{ competitor.get('category', '—') }}</td>
-                    <td>{{ competitor.get('competitive_overlap', '—') }}</td>
-                    <td>{{ competitor.get('funding_stage', '—') }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
-
-        {% if positioning.get('recommendations') %}
-        <div class="summary-card" style="margin-top: 12px;">
-            <span class="label">Strategic Recommendations</span>
-            <ul class="inline-list">
-                {% for rec in positioning.get('recommendations', [])[:4] %}
-                    <li>{{ rec }}</li>
-                {% else %}
-                    <li style="color: var(--text-tertiary);">Recommendations pending competitive review.</li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
-    </section>
-
-    <div class="divider"></div>
-
-    <section>
-        <h2 class="section-title">Investment Scorecard</h2>
-        {% if investment_scores.get('scores') %}
-        <table class="metrics">
-            <thead>
-            <tr>
-                <th>Dimension</th>
-                <th>Score</th>
-                <th>Max</th>
-                <th>Coverage</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for category, values in investment_scores.get('scores', {}).items() %}
-                {% set score = values.get('subtotal', 0) %}
-                {% set max_score = values.get('max', 100) %}
-                {% set percent = 0 %}
-                {% if max_score %}
-                    {% set percent = (score / max_score * 100) if max_score else 0 %}
+        <div class="grid-two">
+            <div class="mini-card">
+                <strong>Technology</strong>
+                <div style="margin-top:6px;">{{ tech_summary.get('paragraph', 'Awaiting input.') }}</div>
+                {% if tech_summary.get('bullets') %}
+                <ul class="compact">
+                    {% for item in tech_summary.get('bullets')[:3] %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
                 {% endif %}
+            </div>
+            <div class="mini-card">
+                <strong>Market & Competition</strong>
+                <div style="margin-top:6px;">{{ market_summary.get('paragraph', 'Awaiting input.') }}</div>
+                {% if market_summary.get('bullets') %}
+                <ul class="compact">
+                    {% for item in market_summary.get('bullets')[:3] %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="grid-two" style="margin-top:10px;">
+            <div class="mini-card">
+                <strong>Risk Posture</strong>
+                <div style="margin-top:6px;">{{ risk_summary.get('paragraph', 'Awaiting input.') }}</div>
+                {% if risk_summary.get('bullets') %}
+                <ul class="compact">
+                    {% for item in risk_summary.get('bullets')[:3] %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="mini-card">
+                <strong>Investment Outlook</strong>
+                <div style="margin-top:6px;">{{ investment_summary.get('paragraph', 'Awaiting input.') }}</div>
+                {% if investment_summary.get('bullets') %}
+                <ul class="compact">
+                    {% for item in investment_summary.get('bullets')[:3] %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        {% set competitors = data.get('competitor_list', []) %}
+        {% if competitors %}
+        <h2 class="section">Peer snapshot</h2>
+        <table class="slim">
+            <thead>
                 <tr>
-                    <td>{{ category.replace('_', ' ') | title }}</td>
-                    <td>{{ score }}</td>
-                    <td>{{ max_score }}</td>
-                    <td>
-                        <div class="score-bar" style="height: 6px;">
-                            {% set bar_width = percent_width(percent) %}
-                            <span style="width: {{ bar_width }}%;"></span>
-                        </div>
-                    </td>
+                    <th>Company</th>
+                    <th>Focus</th>
+                    <th>Overlap</th>
                 </tr>
-            {% endfor %}
+            </thead>
+            <tbody>
+                {% for rival in competitors[:2] %}
+                <tr>
+                    <td>{{ rival.get('name', 'N/A') }}</td>
+                    <td>{{ rival.get('description', '')[:70] }}</td>
+                    <td>{{ rival.get('competitive_overlap', '—') }}</td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
-        {% else %}
-            <p style="color: var(--text-tertiary);">Scorecard data awaiting synthesis.</p>
         {% endif %}
 
-        {% if risk_assessment %}
-        <div class="summary-card" style="margin-top: 12px;">
-            <span class="label">Risk Review</span>
-            <ul class="inline-list">
-                {% for key, payload in risk_assessment.items() if key != 'overall_risk_score' and payload is mapping %}
-                    <li>{{ key.replace('_', ' ') | title }} — level {{ payload.get('level', '—') }} | likelihood {{ payload.get('likelihood', 'n/a') }} | impact {{ payload.get('impact', 'n/a') }}</li>
-                {% else %}
-                    <li style="color: var(--text-tertiary);">Detailed risk taxonomy not provided.</li>
-                {% endfor %}
-            </ul>
+        <div class="footnote">
+            Generated via LangGraph investment pipeline · Formal single-page extract. Further detail available in
+            supporting appendices.
         </div>
-        {% endif %}
-    </section>
-
-    <footer>
-        Edutech Lighthouse Strategic Review · Proprietary & Confidential · All figures subject to validation. Independent verification advised prior to investment commitment.
-    </footer>
-</div>
+    </div>
 </body>
+
 </html>

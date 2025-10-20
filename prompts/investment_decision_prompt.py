@@ -69,7 +69,7 @@ INVESTMENT_DECISION_PROMPT = """
 JSON 형식으로 출력:
 
 {{
-  "decision": "확정",
+  "decision": "유치",
   "confidence": "높음/중간/낮음",
   "key_strengths": ["강점1", "강점2"],
   "key_concerns": ["우려1", "우려2"],

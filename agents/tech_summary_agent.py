@@ -57,4 +57,6 @@ async def tech_summary_node(state: Dict) -> Dict:
     current["tech_summary"] = parsed
 
     print(f"[{current.get('name', 'Unknown')}] 기술 요약 완료")
-    return {"current_startup": current}
+    state["current_startup"] = current
+    return state
+
