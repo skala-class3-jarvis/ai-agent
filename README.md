@@ -93,8 +93,7 @@
 |------------------|-------------------------------|-------------------------------------|
 | retriever        | FAISS + HuggingFace Embedding | 내부 PDF 기반 RAG 검색              |
 | search_tool      | DuckDuckGo Search             | 최신 시장 데이터 보강을 위한 웹 검색|
-| llm              | OpenAI Chat Model             | 정량 분석 수행                      |
-| llm_creative     | OpenAI Chat Model             | 리포트 생성                         |
+
 
 **Nodes**
 
@@ -219,4 +218,5 @@ ai-agent/
 - [KERIS 한국교육학술정보원](https://www.keris.or.kr/main/ad/pblcte/selectPblcteOVSEAList.do?mi=1143)
 - [ESSA Evidence Standards](https://essa.ed.gov/)
 - [EdTech Investment Trends - HolonIQ](https://www.holoniq.com/)
+
 
