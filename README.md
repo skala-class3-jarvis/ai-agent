@@ -33,12 +33,12 @@
 | Embedding  | HuggingFaceEmbedding - dragonkue/multilingual-e5-small-ko    |
 
 ## Agents
-### Agent A : 스타트업 탐색 에이전트 (Startup Search Agent)
+### 1.Startup Search Agent: 스타트업 탐색 에이전트 
 - 유저의 질의에 따라 시장 내 유망 스타트업 후보를 검색 및 구조화
 - Node : startup_search_node
 - Tool : TavilySearchResults, ChatOpenAI (GPT-4o-mini), PromptTemplate, JSON Parser
  
-### Agent B : Main Agent 정보 전달에 따른 기업 기술 요약
+### 2.Tech summary Agent : 정보 전달에 따른 기업 기술 요약
     - Node : prepare → llm_call → parse
     - Tool : Responses API(gpt-4o-mini), Pydantic(TechSummarySchema), StateGraph
 
@@ -55,7 +55,7 @@
 | `llm_call`             | OpenAI API 호출로 초기 요약 생성                     |
 | `parse`                | JSON 파싱 및 Pydantic 검증, 안전한 요약 결과 반환       |
 
-### Agent C : Main Agent 정보 전달에 따른 기업 시장성 평가 세부 지표 파악
+### 3.Market eval agent : 정보 전달에 따른 기업 시장성 평가 세부 지표 파악
     - Node : retriever, search_tool, classify_query, retrieve_internal, web_search, analyze_market_size,
              analyze_growth, analyze_competition, analyze_risks, calculate_score, generate_report
     - Tool : [retriever_tool, search_tool]
@@ -76,7 +76,7 @@
 | `calculate_score`     | 시장성 점수(0~100) 산출 (정량 평가)                |
 | `generate_report`     | Executive Summary 형태 최종 보고서 생성          |
 
-### Agent D (Competitor Analysis Agent) : 웹 검색을 통해 경쟁사를 탐색하고, 경쟁 구도 및 시장 포지셔닝을 자동 분석하는 에이전트
+### 4.Competitor Analysis Agent : 웹 검색을 통해 경쟁사를 탐색하고, 경쟁 구도 및 시장 포지셔닝을 자동 분석하는 에이전트
     - Node : identify_competitors, analyze_competitive_landscape, evaluate_competitive_positioning
     - Tool : DuckDuckGoSearchRun, ChatOpenAI (GPT-4o-mini), ChatPromptTemplate, StateGraph
 
@@ -126,6 +126,8 @@ ai-agent/
    ├─ report_template.html
    └─ report_test.pdf
 ```
+
+
 
 ## Contributors 
 - 정재민 : Evaluation market size RAG Agent Design
