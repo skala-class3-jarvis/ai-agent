@@ -134,6 +134,32 @@
 
 ---
 
+## Agent F — 보고서 생성 에이전트 (Report Generation Agent)
+
+- **역할** :  
+  LangGraph 워크플로우의 마지막 단계로, 각 스타트업의 기술·시장·경쟁·투자 분석 결과를 LLM 기반으로 요약하고 PDF 형태의 최종 보고서를 자동 생성함.  
+  내부 데이터를 요약 LLM(`gpt-4o-mini`)으로 정리한 후, FastAPI 기반 `report_server`에 POST 하여 PDF 파일(`outputs/*.pdf`)을 생성한다.
+
+- **Node** : `report_node`  
+- **Tool** : ChatOpenAI (GPT-4o-mini), aiohttp, FastAPI Report Server, ChatPromptTemplate (SUMMARY_TEMPLATE), JSON Parser
+
+| Tool Name            | Library / 구성 요소             | 역할                                                         |
+| -------------------- | -------------------------------- | ------------------------------------------------------------ |
+| `summary_llm`        | ChatOpenAI (GPT-4o-mini)         | 투자 결과 및 기술/시장 정보를 요약 LLM 요약문 생성            |
+| `SUMMARY_TEMPLATE`   | ChatPromptTemplate (LangChain Core) | 1-page investment summary 프롬프트 구성 및 LLM 입력 정의      |
+| `aiohttp ClientSession` | aiohttp 라이브러리               | FastAPI report server로 비동기 POST 요청 전송 및 PDF 수신      |
+| `report_server`      | FastAPI (`generate-report`) 엔드포인트 | LLM 요약 결과를 HTML(Jinja2 template) → WeasyPrint PDF로 변환 |
+| `JSON Parser`        | Python 표준 라이브러리            | LLM 출력 구조 검증 및 후처리 정규화 (불완전한 응답 보정)     |
+
+| Node          | 역할                                                        |
+| -------------- | ----------------------------------------------------------- |
+| `report_node`  | LangGraph 최종 단계 — 분석 결과를 LLM 요약 및 PDF 보고서 생성 |
+| `_build_summary` | LLM을 호출하여 기술/시장/리스크/투자 항목별 compact 요약 JSON 생성 |
+| `_prepare_competitor_snippet` | 경쟁사 리스트를 간결한 문장으로 정리 (최대 4개 표시) |
+| `_shorten`     | 텍스트 길이 제한 및 ellipsis 처리 (LLM 입력 최적화)         |
+
+---
+
 ## 전체 파이프라인 요약
 
 ## Architecture
