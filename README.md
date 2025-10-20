@@ -160,9 +160,6 @@
 | assess_investment_risks     | 6개 리스크 요소 평가 및 위험도 산출       |
 | make_final_decision         | 종합 점수 기반 최종 투자 결정 도출        |
 
-
----
-
 ### 투자적합성 평가 지표
 ### 투자 평가 지표
 1. 일반 스타트업이 아닌 교육 분야에 최적화된 평가 지표 
@@ -371,6 +368,7 @@ ai-agent/
 - [KERIS 한국교육학술정보원](https://www.keris.or.kr/main/ad/pblcte/selectPblcteOVSEAList.do?mi=1143)
 - [ESSA Evidence Standards](https://essa.ed.gov/)
 - [EdTech Investment Trends - HolonIQ](https://www.holoniq.com/)
+
 
 
 
