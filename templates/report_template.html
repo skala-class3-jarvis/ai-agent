@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <style>
@@ -12,16 +11,18 @@
         :root {
             --blue-dark: #0a1f44;
             --blue-primary: #0d66c2;
+            --blue-light: #d8e5f7;
             --red-accent: #b22234;
             --grey-text: #5b6673;
             --grey-light: #d6dbe2;
             --grey-panel: #f4f6f9;
+            --green: #2c8558;
         }
 
         body {
             font-family: "Inter", "Segoe UI", Arial, sans-serif;
             font-size: 9pt;
-            line-height: 1.35;
+            line-height: 1.4;
             color: var(--blue-dark);
             background: #ffffff;
         }
@@ -87,6 +88,15 @@
             color: var(--grey-text);
         }
 
+        .company-overview {
+            background: var(--grey-panel);
+            border: 1px solid var(--grey-light);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            font-size: 8.5pt;
+        }
+
         .metrics-row {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -113,6 +123,52 @@
             font-size: 12pt;
             font-weight: 600;
             margin-top: 4px;
+        }
+
+        .score-breakdown {
+            margin: 14px 0 16px;
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        .score-segment {
+            border: 1px solid var(--grey-light);
+            border-radius: 8px;
+            padding: 8px;
+            background: #fff;
+            text-align: center;
+        }
+
+        .score-segment .label {
+            display: block;
+            font-size: 7pt;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--grey-text);
+        }
+
+        .score-segment .value {
+            font-size: 11pt;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .score-bar {
+            margin-top: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--grey-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-bar span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--blue-primary), var(--green));
         }
 
         h2.section {
@@ -192,139 +248,184 @@
         }
     </style>
 </head>
-
 <body>
-    {% set summary = data.get('llm_summary', {}) %}
-    {% set tech_summary = summary.get('technology', {}) %}
-    {% set market_summary = summary.get('market_competition', {}) %}
-    {% set risk_summary = summary.get('risk', {}) %}
-    {% set investment_summary = summary.get('investment', {}) %}
-    {% set metrics = data.get('headline_metrics', {}) %}
-    <div class="wrapper">
-        <header>
-            <div class="brand">
-                <div class="badge">EL</div>
-                <div class="brand-label">Edutech lighthouse briefing</div>
-            </div>
-            <div class="title-block">
-                <h1>{{ data.get('company_name', 'Edtech Venture Report') }}</h1>
-                <span>Confidential · Single-page overview</span>
-            </div>
-        </header>
-
-        <div class="metrics-row">
-            <div class="metric-card">
-                <div class="metric-label">Decision</div>
-                <div class="metric-value" style="color: var(--blue-primary);">{{ metrics.get('decision', 'Under Review')
-                    }}</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-label">Score</div>
-                <div class="metric-value">{{ metrics.get('score', 'N/A') }}</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-label">Confidence</div>
-                <div class="metric-value">{{ metrics.get('confidence', 'N/A') }}</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-label">Overall risk</div>
-                <div class="metric-value" style="color: var(--red-accent);">{{ metrics.get('overall_risk', 'N/A') }}
-                </div>
-            </div>
+{% set summary = data.get('llm_summary', {}) %}
+{% set tech_summary = summary.get('technology', {}) %}
+{% set market_summary = summary.get('market_competition', {}) %}
+{% set risk_summary = summary.get('risk', {}) %}
+{% set investment_summary = summary.get('investment', {}) %}
+{% set metrics = data.get('headline_metrics', {}) %}
+{% set scores = data.get('investment_scores', {}) %}
+{% set score_breakdown = scores.get('scores', {}) %}
+{% set risk = data.get('risk_assessment', {}) %}
+{% set company = data.get('company_name', 'The company') %}
+{% set domain = data.get('domain', '') %}
+{% set tech_eval = data.get('tech_eval', {}) %}
+{% set market_eval = data.get('market_eval', {}) %}
+<div class="wrapper">
+    <header>
+        <div class="brand">
+            <div class="badge">EL</div>
+            <div class="brand-label">Edutech Lighthouse Briefing</div>
         </div>
-
-        {% if summary.get('headline_points') %}
-        <div class="summary-text">
-            <strong>Key headlines:</strong>
-            <ul class="compact">
-                {% for item in summary.get('headline_points', [])[:3] %}
-                <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
+        <div class="title-block">
+            <h1>{{ company }}</h1>
+            <span>Confidential · Investor Summary</span>
         </div>
+    </header>
+
+    <div class="company-overview">
+        {% set location = market_eval.get('region') or data.get('location') or 'A global' %}
+        {% set core = tech_eval.get('summary') or data.get('tech_summary', {}).get('summary') or market_eval.get('summary') %}
+        {% if core %}
+            {{ location }} edtech company focused on {{ domain if domain != '에듀테크' else 'education technology' }} solutions. {{ core[:180] }}{% if core|length > 180 %}…{% endif %}
+        {% else %}
+            {{ company }} is an edtech company delivering digital learning solutions.
         {% endif %}
+    </div>
 
-        <h2 class="section">Executive summary</h2>
-        <div class="summary-text">{{ summary.get('executive_summary', 'Summary pending.') }}</div>
-
-        <div class="grid-two">
-            <div class="mini-card">
-                <strong>Technology</strong>
-                <div style="margin-top:6px;">{{ tech_summary.get('paragraph', 'Awaiting input.') }}</div>
-                {% if tech_summary.get('bullets') %}
-                <ul class="compact">
-                    {% for item in tech_summary.get('bullets')[:3] %}
-                    <li>{{ item }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
-            <div class="mini-card">
-                <strong>Market & Competition</strong>
-                <div style="margin-top:6px;">{{ market_summary.get('paragraph', 'Awaiting input.') }}</div>
-                {% if market_summary.get('bullets') %}
-                <ul class="compact">
-                    {% for item in market_summary.get('bullets')[:3] %}
-                    <li>{{ item }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
+    <div class="metrics-row">
+        <div class="metric-card">
+            <div class="metric-label">Decision</div>
+            <div class="metric-value" style="color: var(--blue-primary);">{{ metrics.get('decision', 'Under Review') }}</div>
         </div>
-
-        <div class="grid-two" style="margin-top:10px;">
-            <div class="mini-card">
-                <strong>Risk Posture</strong>
-                <div style="margin-top:6px;">{{ risk_summary.get('paragraph', 'Awaiting input.') }}</div>
-                {% if risk_summary.get('bullets') %}
-                <ul class="compact">
-                    {% for item in risk_summary.get('bullets')[:3] %}
-                    <li>{{ item }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
-            <div class="mini-card">
-                <strong>Investment Outlook</strong>
-                <div style="margin-top:6px;">{{ investment_summary.get('paragraph', 'Awaiting input.') }}</div>
-                {% if investment_summary.get('bullets') %}
-                <ul class="compact">
-                    {% for item in investment_summary.get('bullets')[:3] %}
-                    <li>{{ item }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
+        <div class="metric-card">
+            <div class="metric-label">Total Score</div>
+            <div class="metric-value">{{ metrics.get('score', scores.get('total_score', 'N/A')) }}</div>
+            <div class="metric-label" style="margin-top:4px;">Percentile {{ scores.get('percentile_rank', '—') }}</div>
         </div>
-
-        {% set competitors = data.get('competitor_list', []) %}
-        {% if competitors %}
-        <h2 class="section">Peer snapshot</h2>
-        <table class="slim">
-            <thead>
-                <tr>
-                    <th>Company</th>
-                    <th>Focus</th>
-                    <th>Overlap</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rival in competitors[:2] %}
-                <tr>
-                    <td>{{ rival.get('name', 'N/A') }}</td>
-                    <td>{{ rival.get('description', '')[:70] }}</td>
-                    <td>{{ rival.get('competitive_overlap', '—') }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
-
-        <div class="footnote">
-            Generated via LangGraph investment pipeline · Formal single-page extract. Further detail available in
-            supporting appendices.
+        <div class="metric-card">
+            <div class="metric-label">Confidence</div>
+            <div class="metric-value">{{ metrics.get('confidence', 'N/A') }}</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Overall Risk</div>
+            <div class="metric-value" style="color: var(--red-accent);">{{ metrics.get('overall_risk', risk.get('overall_risk_score', 'N/A')) }}</div>
         </div>
     </div>
-</body>
 
+    {% if score_breakdown %}
+    <div class="score-breakdown">
+        {% for name, values in score_breakdown.items() %}
+            {% set subtotal = values.get('subtotal', 0) %}
+            {% set maximum = values.get('max', 1) %}
+            {% set pct = (subtotal / maximum * 100) if maximum else 0 %}
+            <div class="score-segment">
+                <span class="label">{{ name.replace('_', ' ') | title }}</span>
+                <span class="value">{{ subtotal }}/{{ maximum }}</span>
+                <div class="score-bar">
+                    <span style="width: {{ pct if pct < 100 else 100 }}%;"></span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <h2 class="section">Executive Summary</h2>
+    <div class="summary-text">{{ summary.get('executive_summary', 'Summary pending.') }}</div>
+
+    <div class="grid-two">
+        <div class="mini-card">
+            <strong>Technology</strong>
+            <div style="margin-top:6px;">{{ tech_summary.get('paragraph', 'Awaiting input.') }}</div>
+            {% if tech_summary.get('bullets') %}
+            <ul class="compact">
+                {% for item in tech_summary.get('bullets')[:3] %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="mini-card">
+            <strong>Market & Competition</strong>
+            <div style="margin-top:6px;">{{ market_summary.get('paragraph', 'Awaiting input.') }}</div>
+            {% if market_summary.get('bullets') %}
+            <ul class="compact">
+                {% for item in market_summary.get('bullets')[:3] %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="grid-two" style="margin-top:10px;">
+        <div class="mini-card">
+            <strong>Risk Posture</strong>
+            <div style="margin-top:6px;">{{ risk_summary.get('paragraph', 'Awaiting input.') }}</div>
+            {% if risk_summary.get('bullets') %}
+            <ul class="compact">
+                {% for item in risk_summary.get('bullets')[:3] %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="mini-card">
+            <strong>Investment Outlook</strong>
+            <div style="margin-top:6px;">{{ investment_summary.get('paragraph', 'Awaiting input.') }}</div>
+            {% if investment_summary.get('bullets') %}
+            <ul class="compact">
+                {% for item in investment_summary.get('bullets')[:3] %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    {% set competitors = data.get('competitor_list', []) %}
+    {% if competitors %}
+    <h2 class="section">Peer Snapshot</h2>
+    <table class="slim">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Focus</th>
+                <th>Overlap</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rival in competitors[:2] %}
+            <tr>
+                <td>{{ rival.get('name', 'N/A') }}</td>
+                <td>{{ rival.get('description', '')[:70] }}</td>
+                <td>{{ rival.get('competitive_overlap', '—') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    {% if risk %}
+    <h2 class="section">Risk Metrics</h2>
+    <table class="slim">
+        <thead>
+            <tr>
+                <th>Risk Factor</th>
+                <th>Level</th>
+                <th>Likelihood</th>
+                <th>Impact</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, payload in risk.items() %}
+                {% if key != 'overall_risk_score' and payload is mapping %}
+                <tr>
+                    <td>{{ key.replace('_', ' ') | title }}</td>
+                    <td>{{ payload.get('level', '—') }}</td>
+                    <td>{{ payload.get('likelihood', '—') }}</td>
+                    <td>{{ payload.get('impact', '—') }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <div class="footnote">
+        Generated via LangGraph investment pipeline. Evaluation framework references ESSA Evidence Standards, HolonIQ Global Impact Intelligence, and recent EdTech investment trend benchmarks.
+    </div>
+</div>
+</body>
 </html>
