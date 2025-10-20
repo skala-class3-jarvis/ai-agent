@@ -108,7 +108,7 @@
 | analyze_competition     | 경쟁 구도 분석 (Porter 5 Forces, 경쟁 강도)         |
 | analyze_risks           | 시장 리스크 분석 (기술/경쟁/규제/수요)              |
 | calculate_score         | 시장성 점수(0~100) 산출                             |
-| generate_report         | Executive Summary 형태 최종 보고서 생성             |
+
 
 ---
 
@@ -219,3 +219,4 @@ ai-agent/
 - [KERIS 한국교육학술정보원](https://www.keris.or.kr/main/ad/pblcte/selectPblcteOVSEAList.do?mi=1143)
 - [ESSA Evidence Standards](https://essa.ed.gov/)
 - [EdTech Investment Trends - HolonIQ](https://www.holoniq.com/)
+
