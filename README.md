@@ -359,7 +359,7 @@ ai-agent/
 
 - **정재민**: Market Size Evaluation RAG Agent Design
 - **장소민**: Company Comparison and Investment Evaluation Decision Agent Design
-- **한정석**: Main Agent Design, Agent Integration, PDF Generation
+- **한정석**: Search Agent Design, Agent Integration, PDF Generation
 - **이정엽**: Company Technical Skill Set Summary Agent Design
 
 ## References
@@ -368,6 +368,7 @@ ai-agent/
 - [KERIS 한국교육학술정보원](https://www.keris.or.kr/main/ad/pblcte/selectPblcteOVSEAList.do?mi=1143)
 - [ESSA Evidence Standards](https://essa.ed.gov/)
 - [EdTech Investment Trends - HolonIQ](https://www.holoniq.com/)
+
 
 
 
